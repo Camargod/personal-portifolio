@@ -49,7 +49,7 @@ export const PERSON: Person = {
   name: 'Gabriel Camargo',
   initials: 'GC',
   linkedin: 'https://www.linkedin.com/in/gabriel-camargo-21aa12174/',
-  email: '',
+  email: 'creeplays@gmail.com',
   location: { pt: 'Santo André, SP — Brasil', en: 'Santo André, SP — Brazil' },
   headline: {
     pt: 'Arquiteto de Soluções Sênior | Java, Go, Angular, GCP | Cloud Architecture & DevOps | Microservices',

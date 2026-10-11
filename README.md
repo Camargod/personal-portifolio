@@ -30,7 +30,7 @@ src/app/
 Quase todo o conteúdo vive em `src/app/data/profile.ts` (experiência, skills, projetos)
 e em `src/app/core/translations.ts` (textos de interface PT/EN).
 
-Para preencher e-mail de contato, defina `PERSON.email` em `src/app/data/profile.ts`
+Para preencher e-mail de contato, edite `PERSON.email` em `src/app/data/profile.ts`
 (o botão de e-mail só aparece quando o campo está preenchido).
 
 ## Comandos
@@ -41,7 +41,24 @@ npm run build # build de produção em dist/portfolio
 npm test      # testes unitários (Vitest)
 ```
 
-## Deploy
+## Deploy — GitHub Pages
 
-O build gera arquivos estáticos em `dist/portfolio/browser`, prontos para
-Vercel, Netlify, GitHub Pages ou qualquer hospedagem estática.
+O deploy é automático via GitHub Actions (`.github/workflows/deploy.yml`) a cada
+push na branch `main`. O workflow calcula o `base-href` sozinho:
+
+- repositório `usuario.github.io` → base `/`
+- qualquer outro repositório → base `/nome-do-repo/`
+
+Passos (uma vez):
+
+1. Crie o repositório no GitHub e faça o push da branch `main`.
+2. Em **Settings → Pages**, defina **Source: GitHub Actions**.
+3. Faça um push na `main` (ou rode o workflow em **Actions → Deploy to GitHub Pages → Run workflow**).
+
+O site fica em `https://<usuario>.github.io/<repo>/`.
+
+Para gerar a build manualmente com o caminho certo:
+
+```bash
+npm run build -- --base-href /nome-do-repo/
+```
