@@ -1,0 +1,67 @@
+<section id="about" class="relative py-24 sm:py-28">
+  <div class="container-px">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div appReveal>
+        <span class="chip">
+          <span class="h-1.5 w-1.5 rounded-full bg-violet-400"></span>
+          {{ i18n.t('about.kicker') }}
+        </span>
+        <h2 class="mt-4 font-display text-3xl font-bold sm:text-4xl">
+          {{ i18n.t('about.title') }}
+          <span class="gradient-text">.</span>
+        </h2>
+
+        <div class="mt-8 space-y-3">
+          @for (key of highlights; track key; let i = $index) {
+            <div class="surface-card flex items-center gap-3 px-4 py-3">
+              <span
+                class="grid h-8 w-8 shrink-0 place-items-center rounded-lg font-display text-xs font-bold text-ink"
+                [class]="
+                  i === 0
+                    ? 'bg-linear-to-br from-violet-400 to-fuchsia-500'
+                    : i === 1
+                      ? 'bg-linear-to-br from-cyan-400 to-sky-500'
+                      : i === 2
+                        ? 'bg-linear-to-br from-emerald-400 to-teal-500'
+                        : 'bg-linear-to-br from-amber-400 to-orange-500'
+                "
+              >
+                {{ i + 1 }}
+              </span>
+              <span class="text-sm font-medium text-slate-200">{{ i18n.t(key) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div appReveal [revealDelay]="120" class="space-y-5">
+        <article class="surface-card p-6 text-base leading-relaxed text-slate-300 sm:p-8">
+          <p>{{ i18n.t('about.p1') }}</p>
+          <p class="mt-4">{{ i18n.t('about.p2') }}</p>
+          <p class="mt-4 text-slate-400">{{ i18n.t('about.p3') }}</p>
+        </article>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="surface-card p-4">
+            <p class="font-display text-2xl font-bold text-white">6+</p>
+            <p class="mt-1 text-xs text-slate-400">
+              {{ i18n.lang() === 'pt' ? 'anos de carreira' : 'years of career' }}
+            </p>
+          </div>
+          <div class="surface-card p-4">
+            <p class="font-display text-2xl font-bold text-white">11</p>
+            <p class="mt-1 text-xs text-slate-400">
+              {{ i18n.lang() === 'pt' ? 'microsserviços liderados' : 'microservices led' }}
+            </p>
+          </div>
+          <div class="surface-card p-4">
+            <p class="font-display text-2xl font-bold text-white">Full-stack</p>
+            <p class="mt-1 text-xs text-slate-400">
+              {{ i18n.lang() === 'pt' ? 'do back ao front' : 'back to front' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

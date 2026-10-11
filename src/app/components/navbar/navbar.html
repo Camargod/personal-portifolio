@@ -1,0 +1,94 @@
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  [class.backdrop-blur-xl]="scrolled()"
+  [class.bg-ink/80]="scrolled()"
+  [class.border-b]="scrolled()"
+  [class.border-white/10]="scrolled()"
+>
+  <nav class="container-px flex h-16 items-center justify-between gap-4">
+    <a href="#top" class="group flex items-center gap-3" (click)="close()">
+      <span
+        class="grid h-10 w-10 place-items-center rounded-xl bg-linear-to-br from-violet-500 to-cyan-500 font-display text-sm font-bold text-ink shadow-[0_0_25px_-4px_rgba(139,92,246,0.8)]"
+      >
+        {{ person.initials }}
+      </span>
+      <span class="hidden font-display text-base font-semibold tracking-tight sm:block">
+        {{ person.name }}
+      </span>
+    </a>
+
+    <ul class="hidden items-center gap-1 lg:flex">
+      @for (link of links; track link.href) {
+        <li>
+          <a
+            [href]="link.href"
+            class="rounded-full px-3.5 py-2 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white"
+          >
+            {{ i18n.t(link.key) }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="i18n.toggle()"
+        class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 transition hover:border-violet-400/60 hover:text-white"
+        [attr.aria-label]="'Trocar idioma / Switch language'"
+      >
+        {{ i18n.lang() === 'pt' ? 'EN' : 'PT' }}
+      </button>
+
+      <a
+        [href]="person.linkedin"
+        target="_blank"
+        rel="noopener"
+        class="btn-neon hidden sm:inline-flex"
+      >
+        {{ i18n.t('nav.cta') }}
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17 17 7M17 7H8M17 7v9" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <button
+        type="button"
+        class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-200 lg:hidden"
+        (click)="toggle()"
+        aria-label="Menu"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          @if (open()) {
+            <path d="M6 6l12 12M6 18L18 6" stroke-linecap="round" />
+          } @else {
+            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+          }
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  @if (open()) {
+    <div class="border-t border-white/10 bg-ink/95 backdrop-blur-xl lg:hidden">
+      <ul class="container-px flex flex-col py-4">
+        @for (link of links; track link.href) {
+          <li>
+            <a
+              [href]="link.href"
+              (click)="close()"
+              class="block rounded-xl px-4 py-3 text-sm font-medium text-slate-200 transition hover:bg-white/5"
+            >
+              {{ i18n.t(link.key) }}
+            </a>
+          </li>
+        }
+        <li class="px-4 pt-3">
+          <a [href]="person.linkedin" target="_blank" rel="noopener" class="btn-neon w-full justify-center">
+            {{ i18n.t('nav.cta') }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
+</header>

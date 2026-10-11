@@ -1,0 +1,72 @@
+<section id="experience" class="relative py-24 sm:py-28">
+  <div class="container-px">
+    <div appReveal class="mx-auto max-w-2xl text-center">
+      <span class="chip">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+        {{ i18n.t('experience.kicker') }}
+      </span>
+      <h2 class="mt-4 font-display text-3xl font-bold sm:text-4xl">
+        {{ i18n.t('experience.title') }}
+        <span class="gradient-text">.</span>
+      </h2>
+    </div>
+
+    <ol class="relative mx-auto mt-14 max-w-3xl">
+      <span
+        class="absolute bottom-2 left-[1.05rem] top-2 w-px bg-linear-to-b from-violet-500/60 via-cyan-500/40 to-transparent sm:left-[1.3rem]"
+        aria-hidden="true"
+      ></span>
+
+      @for (company of companies; track company.name; let ci = $index) {
+        <li appReveal [revealDelay]="ci * 60" class="relative pb-10 pl-14 sm:pl-16">
+          <span
+            class="absolute left-0 top-1 grid h-9 w-9 place-items-center rounded-xl bg-linear-to-br font-display text-[0.62rem] font-bold text-ink shadow-[0_0_22px_-6px_rgba(139,92,246,0.9)] sm:h-11 sm:w-11 sm:text-xs"
+            [class]="company.accent"
+          >
+            {{ company.initials }}
+          </span>
+
+          <div class="surface-card p-5 sm:p-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 class="font-display text-lg font-bold text-white sm:text-xl">{{ company.name }}</h3>
+              <span class="text-xs font-medium text-slate-400">{{ i18n.lang() === 'pt' ? company.period.pt : company.period.en }}</span>
+            </div>
+
+            <div class="mt-4 space-y-5">
+              @for (role of company.roles; track role.title.pt) {
+                <div class="border-l-2 border-white/10 pl-4">
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <p class="font-medium text-slate-100">
+                      {{ i18n.lang() === 'pt' ? role.title.pt : role.title.en }}
+                    </p>
+                    <span class="text-[0.72rem] text-slate-500">{{ i18n.lang() === 'pt' ? role.period.pt : role.period.en }}</span>
+                  </div>
+                  <p class="mt-0.5 text-xs text-slate-500">
+                    {{ i18n.lang() === 'pt' ? role.location.pt : role.location.en }}
+                  </p>
+                  <p class="mt-2 text-sm leading-relaxed text-slate-400">
+                    {{ i18n.lang() === 'pt' ? role.summary.pt : role.summary.en }}
+                  </p>
+                  <ul class="mt-2 space-y-1">
+                    @for (highlight of role.highlights; track $index) {
+                      <li class="flex gap-2 text-sm text-slate-400">
+                        <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-400/70"></span>
+                        <span>{{ i18n.lang() === 'pt' ? highlight.pt : highlight.en }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              @for (tech of company.stack; track tech) {
+                <span class="chip !text-[0.7rem]">{{ tech }}</span>
+              }
+            </div>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

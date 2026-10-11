@@ -1,0 +1,24 @@
+<footer class="relative border-t border-white/10 py-10">
+  <div class="container-px flex flex-col items-center justify-between gap-6 sm:flex-row">
+    <div class="flex items-center gap-3">
+      <span
+        class="grid h-9 w-9 place-items-center rounded-lg bg-linear-to-br from-violet-500 to-cyan-500 font-display text-xs font-bold text-ink"
+      >
+        {{ person.initials }}
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-slate-200">{{ person.name }}</p>
+        <p class="text-xs text-slate-500">{{ i18n.t('footer.builtWith') }}</p>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-500">© {{ year }} · {{ i18n.t('footer.rights') }}</p>
+
+    <a href="#top" class="btn-ghost !py-2 !text-xs">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      {{ i18n.t('footer.backTop') }}
+    </a>
+  </div>
+</footer>

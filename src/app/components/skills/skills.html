@@ -1,0 +1,44 @@
+<section id="skills" class="relative py-24 sm:py-28">
+  <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div class="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-700/10 blur-[130px]"></div>
+  </div>
+
+  <div class="container-px">
+    <div appReveal class="mx-auto max-w-2xl text-center">
+      <span class="chip">
+        <span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
+        {{ i18n.t('skills.kicker') }}
+      </span>
+      <h2 class="mt-4 font-display text-3xl font-bold sm:text-4xl">
+        {{ i18n.t('skills.title') }}
+        <span class="gradient-text">.</span>
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      @for (group of groups; track group.key; let i = $index) {
+        <div appReveal [revealDelay]="i * 80" class="surface-card group relative overflow-hidden p-6">
+          <div
+            class="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-linear-to-br opacity-25 blur-2xl transition-opacity duration-300 group-hover:opacity-50"
+            [class]="group.accent"
+          ></div>
+
+          <div class="relative flex items-center gap-3">
+            <span class="h-8 w-1.5 rounded-full bg-linear-to-b" [class]="group.accent"></span>
+            <h3 class="font-display text-lg font-semibold text-white">
+              {{ i18n.t(group.key) }}
+            </h3>
+          </div>
+
+          <div class="relative mt-5 flex flex-wrap gap-2">
+            @for (item of group.items; track item) {
+              <span class="chip transition-colors duration-200 hover:border-white/30 hover:text-white">
+                {{ item }}
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
